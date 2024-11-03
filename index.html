@@ -18,14 +18,22 @@
     <meta name="twitter:title" content="My Portfolio">
     <meta name="twitter:description" content="This is my personal page hosted on GitHub Pages.">
     <meta name="twitter:image" content="https://shipilovden.github.io/iam.ico">
+
+    <!-- Подключение Needle Engine -->
+    <script type="module" src="https://unpkg.com/@needle-tools/engine/dist/needle-engine.min.js"></script>
 </head>
-<body>
+<body style="margin:0; padding:0;">
     <h1>Welcome</h1>
     <p>My portfolio of 3D sites.</p>
     <p>1. <a href="https://shipilovden.github.io/Icosahedron/">https://shipilovden.github.io/Icosahedron/</a></p>
     <p>2. <a href="https://shipilovden.github.io/iam/">https://shipilovden.github.io/iam/</a></p>
     <p>3. <a href="https://shipilovden.github.io/jane/">https://shipilovden.github.io/jane/</a></p>
+
+    <!-- Needle Engine компонент с 3D-сценой -->
+    <needle-engine 
+        src="https://cloud.needle.tools/api/v1/public/873a48a/10801b111/MusicalInstrument.glb" 
+        background-blurriness="0.8" 
+        style="width: 100%; height: 400px; display: block; margin: auto;">
+    </needle-engine>
 </body>
 </html>
-
-
