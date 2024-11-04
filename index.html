@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>My portfolio</title>
     <link rel="icon" href="iam.ico" type="image/x-icon">
 
     <!-- Open Graph meta tags -->
@@ -21,102 +21,19 @@
 
     <!-- Подключение Needle Engine -->
     <script type="module" src="https://unpkg.com/@needle-tools/engine/dist/needle-engine.min.js"></script>
-
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-
-        h1 {
-            margin-top: 20px;
-        }
-
-        /* Настройка стиля компонента Needle Engine */
-        needle-engine {
-            width: 100%;
-            height: 400px;
-            display: block;
-            margin: auto;
-            background: #333;
-        }
-
-        /* Адаптация для мобильных устройств */
-        @media (max-width: 768px) {
-            needle-engine {
-                height: 300px;
-            }
-        }
-
-        /* Скрытый QR-код */
-        #qr-code {
-            display: none;
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        button {
-            padding: 10px 20px;
-            margin: 10px;
-            cursor: pointer;
-            border: none;
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
-<body>
+<body style="margin:0; padding:0;">
     <h1>Welcome</h1>
     <p>My portfolio of 3D sites.</p>
     <p>1. <a href="https://shipilovden.github.io/Icosahedron/">https://shipilovden.github.io/Icosahedron/</a></p>
     <p>2. <a href="https://shipilovden.github.io/iam/">https://shipilovden.github.io/iam/</a></p>
     <p>3. <a href="https://shipilovden.github.io/jane/">https://shipilovden.github.io/jane/</a></p>
 
-    <!-- Кнопки для отображения QR-кода и копирования ссылки -->
-    <button onclick="toggleQRCode()">Показать QR-код</button>
-    <button onclick="copyLink()">Скопировать ссылку на сайт</button>
-
-    <!-- QR-код (по умолчанию скрыт) -->
-    <div id="qr-code">
-        <img 
-            src="https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=https://shipilovden.github.io/iam/" 
-            alt="QR Code for My Portfolio">
-    </div>
-
     <!-- Needle Engine компонент с 3D-сценой -->
     <needle-engine 
         src="https://cloud.needle.tools/api/v1/public/873a48a/10801b111/MusicalInstrument.glb" 
         background-blurriness="0.8" 
-        loadfinished="onSceneLoaded">
+        style="width: 100%; height: 400px; display: block; margin: auto;">
     </needle-engine>
-
-    <script>
-        // Функция для отображения/скрытия QR-кода
-        function toggleQRCode() {
-            const qrCodeDiv = document.getElementById('qr-code');
-            qrCodeDiv.style.display = qrCodeDiv.style.display === 'none' ? 'block' : 'none';
-        }
-
-        // Функция для копирования ссылки в буфер обмена
-        function copyLink() {
-            navigator.clipboard.writeText("https://shipilovden.github.io/iam/")
-                .then(() => alert("Ссылка скопирована!"));
-        }
-
-        // Функция, выполняемая после загрузки сцены
-        function onSceneLoaded(ctx) {
-            console.log("3D сцена загружена:", ctx.scene);
-            // Пример взаимодействия: изменение фона
-            ctx.scene.background = new THREE.Color(0x222222);
-        }
-    </script>
 </body>
 </html>
