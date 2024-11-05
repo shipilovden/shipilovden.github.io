@@ -29,11 +29,32 @@
     <p>2. <a href="https://shipilovden.github.io/iam/">https://shipilovden.github.io/iam/</a></p>
     <p>3. <a href="https://shipilovden.github.io/jane/">https://shipilovden.github.io/jane/</a></p>
 
+    <!-- Кнопка для отображения QR-кода -->
+    <button onclick="toggleQRCode()" style="display: block; margin: 20px auto;">Показать QR-код</button>
+
+    <!-- QR-код (по умолчанию скрыт) -->
+    <div id="qr-code" style="display: none; text-align: center; margin-top: 10px;">
+        <img 
+            src="https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=https://shipilovden.github.io/iam/" 
+            alt="QR Code for My Portfolio">
+    </div>
+
     <!-- Needle Engine компонент с 3D-сценой -->
     <needle-engine 
         src="https://cloud.needle.tools/api/v1/public/873a48a/10801b111/MusicalInstrument.glb" 
         background-blurriness="0.8" 
         style="width: 100%; height: 400px; display: block; margin: auto;">
     </needle-engine>
+
+    <script>
+        function toggleQRCode() {
+            const qrCodeDiv = document.getElementById('qr-code');
+            if (qrCodeDiv.style.display === 'none') {
+                qrCodeDiv.style.display = 'block';
+            } else {
+                qrCodeDiv.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
