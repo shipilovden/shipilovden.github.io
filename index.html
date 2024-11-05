@@ -1,118 +1,39 @@
-// RotateAndZoomModel.js
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My portfolio</title>
+    <link rel="icon" href="iam.ico" type="image/x-icon">
 
-let isDragging = false;
-let previousPosition = { x: 0, y: 0 };
-let initialDistance = null;
+    <!-- Open Graph meta tags -->
+    <meta property="og:title" content="My Portfolio">
+    <meta property="og:description" content="This is my personal page hosted on GitHub Pages.">
+    <meta property="og:image" content="https://shipilovden.github.io/iam.ico">
+    <meta property="og:url" content="https://shipilovden.github.io/">
+    <meta property="og:type" content="website">
 
-// Обработчики для событий мыши
-const onMouseDown = (event) => {
-    isDragging = true;
-    previousPosition = { x: event.clientX, y: event.clientY };
-};
+    <!-- Twitter Card meta tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="My Portfolio">
+    <meta name="twitter:description" content="This is my personal page hosted on GitHub Pages.">
+    <meta name="twitter:image" content="https://shipilovden.github.io/iam.ico">
 
-const onMouseUp = () => {
-    isDragging = false;
-};
+    <!-- Подключение Needle Engine -->
+    <script type="module" src="https://unpkg.com/@needle-tools/engine/dist/needle-engine.min.js"></script>
+</head>
+<body style="margin:0; padding:0;">
+    <h1>Welcome</h1>
+    <p>My portfolio of 3D sites.</p>
+    <p>1. <a href="https://shipilovden.github.io/Icosahedron/">https://shipilovden.github.io/Icosahedron/</a></p>
+    <p>2. <a href="https://shipilovden.github.io/iam/">https://shipilovden.github.io/iam/</a></p>
+    <p>3. <a href="https://shipilovden.github.io/jane/">https://shipilovden.github.io/jane/</a></p>
 
-const onMouseMove = (event) => {
-    if (isDragging) {
-        const deltaMove = {
-            x: event.clientX - previousPosition.x,
-            y: event.clientY - previousPosition.y
-        };
-
-        const deltaRotationQuaternion = new THREE.Quaternion()
-            .setFromEuler(new THREE.Euler(
-                0,
-                deltaMove.x * 0.01,
-                0,
-                'XYZ'
-            ));
-
-        this.quaternion.multiplyQuaternions(deltaRotationQuaternion, this.quaternion);
-        this.position.y -= deltaMove.y * 0.01;
-
-        previousPosition = { x: event.clientX, y: event.clientY };
-    }
-};
-
-// Обработчики для сенсорных событий
-const onTouchStart = (event) => {
-    if (event.touches.length === 1) {
-        isDragging = true;
-        previousPosition = { x: event.touches[0].clientX, y: event.touches[0].clientY };
-    } else if (event.touches.length === 2) {
-        isDragging = false;
-        initialDistance = Math.hypot(
-            event.touches[0].clientX - event.touches[1].clientX,
-            event.touches[0].clientY - event.touches[1].clientY
-        );
-    }
-};
-
-const onTouchMove = (event) => {
-    if (isDragging && event.touches.length === 1) {
-        const deltaMove = {
-            x: event.touches[0].clientX - previousPosition.x,
-            y: event.touches[0].clientY - previousPosition.y
-        };
-
-        const deltaRotationQuaternion = new THREE.Quaternion()
-            .setFromEuler(new THREE.Euler(
-                0,
-                deltaMove.x * 0.01,
-                0,
-                'XYZ'
-            ));
-
-        this.quaternion.multiplyQuaternions(deltaRotationQuaternion, this.quaternion);
-        this.position.y -= deltaMove.y * 0.01;
-
-        previousPosition = { x: event.touches[0].clientX, y: event.touches[0].clientY };
-    } else if (event.touches.length === 2) {
-        const currentDistance = Math.hypot(
-            event.touches[0].clientX - event.touches[1].clientX,
-            event.touches[0].clientY - event.touches[1].clientY
-        );
-
-        if (initialDistance) {
-            const scaleFactor = currentDistance / initialDistance;
-            this.scale.multiplyScalar(scaleFactor);
-        }
-
-        initialDistance = currentDistance;
-    }
-};
-
-const onTouchEnd = () => {
-    isDragging = false;
-    initialDistance = null;
-};
-
-const onWheel = (event) => {
-    const scaleFactor = event.deltaY > 0 ? 0.9 : 1.1;
-    this.scale.multiplyScalar(scaleFactor);
-};
-
-// Добавляем слушатели для мыши
-window.addEventListener('mousedown', onMouseDown);
-window.addEventListener('mouseup', onMouseUp);
-window.addEventListener('mousemove', onMouseMove);
-window.addEventListener('wheel', onWheel);
-
-// Добавляем слушатели для сенсоров
-window.addEventListener('touchstart', onTouchStart);
-window.addEventListener('touchmove', onTouchMove);
-window.addEventListener('touchend', onTouchEnd);
-
-// Удаляем слушатели при удалении объекта, чтобы избежать утечек памяти
-this.onBeforeDispose = () => {
-    window.removeEventListener('mousedown', onMouseDown);
-    window.removeEventListener('mouseup', onMouseUp);
-    window.removeEventListener('mousemove', onMouseMove);
-    window.removeEventListener('wheel', onWheel);
-
-    window.removeEventListener('touchstart', onTouchStart);
-    window.removeEventListener('touchmove', onTouchMove);
-    window.removeEventListener('touchend', onTouchEnd);
-};
+    <!-- Needle Engine компонент с 3D-сценой -->
+    <needle-engine 
+        src="https://cloud.needle.tools/api/v1/public/873a48a/10801b111/MusicalInstrument.glb" 
+        background-blurriness="0.8" 
+        style="width: 100%; height: 400px; display: block; margin: auto;">
+    </needle-engine>
+</body>
+</html>
